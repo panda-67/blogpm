@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+<span></span>
+{% block title %}PM | News{% endblock %}
+<span></span>
+{% block content %}
+<!-- component -->
+<style>
+  .kofer {
+    background: white url("/media/{{ post.cover_img }}") no-repeat fixed center;
+    background-size: cover;
+  }
+  main {
+    min-width: 78%;
+  }
+  @media (min-width: 640px) {
+    .kofer {
+      background: white url("/media/{{ post.cover_img }}") no-repeat center;
+      background-size: cover;
+      /* border-bottom-right-radius: 1rem;
+      border-bottom-left-radius: 1rem; */
+    }
+    main {
+      max-width: 100vw;
+    }
+  }
+</style>
+
+<div class="relative rounded-lg flex flex-col md:flex-row overflow-x-none items-center -pt-6 md:-top-11 md:shadow-xl md:h-auto mx-2 pb-12">
+  <div class="max-w-screen-xl mx-auto">
+    <main class="font-sans mt-10 sm:w-max">
+      <div class="mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative" style="height: 24em">
+        <div class="absolute rounded-b-2xl md:rounded-b-3xl left-0 bottom-0 w-full h-full z-10" style="background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7))"></div>
+        <div class="kofer h-full rounded-b-2xl md:rounded-b-3xl"></div>
+        <!-- <img src="https://images.unsplash.com/photo-1493770348161-369560ae357d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80" class="absolute left-0 top-0 w-full h-full z-0 object-cover" /> -->
+        <div class="p-4 absolute bottom-0 left-0 z-20">
+          <a href="#" class="px-4 py-1 bg-black text-gray-200 inline-flex items-center justify-center mb-2">PM News</a>
+          <h2 class="text-2xl md:text-4xl font-semibold text-gray-100 leading-tight">{{ post.title }}</h2>
+          <div class="flex mt-3">
+            <!-- <img src="https://randomuser.me/api/portraits/men/97.jpg" class="h-10 w-10 rounded-full mr-2 object-cover" /> -->
+            <svg class="w-12 rounded-full -ml-1 mr-2 pt-1 md:pt-2 object-cover" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; fill: whitesmoke">
+              <path
+                d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z"
+              ></path>
+            </svg>
+            <div class="font-mono font-extrabold md:font-bold">
+              <!-- <p>{{ post.pk }}</p> -->
+              <p class="text-gray-200 text-xs">Ditulis oleh: <span class="text-gray-200 text-sm md:text-base">{{ post.author }}</span></p>
+              <p class="text-gray-300 text-xs md:text-xs">Pada: {{ post.created_on|date:"d-m-Y" }} | <span>{{ post.created_on|time }}</span></p>
+              <p class="text-gray-300 text-xs md:text-xs">Edit: {{ post.updated_on|date:"d-m-Y" }} | <span>{{ post.updated_on|time }}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-4 lg:px-0 mt-12 text-gray-700 max-w-xs md:max-w-screen-md mx-auto text-sm md:text-base leading-relaxed">{{ post.content|safe }}</div>
+    </main>
+    <div class="flex-inline">
+      <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/">Post bulan {{ post.created_on|date:"F" }},</a>
+      <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/">&nbsp;tanggal: {{ post.created_on|date:"j" }}</a>
+    </div>
+  </div>
+</div>
+<div class="flex items-center justify-center rounded-xl mt-8">
+  <a href="#top" class="py-2 px-4 font-black text-sm bg-gray-50 text-gray-700 border border-gray-300 hover:bg-gray-600 hover:text-gray-50 rounded-xl">&uarr;</a>
+  <form method="POST" action="{% url 'pencarian' %}">
+    <div class="relative text-gray-700 focus-within:text-gray-100">
+      {% csrf_token %}
+      <input type="search" name="cari" class="py-2 mx-4 text-sm w-64 md:w-96 bg-gray-50 text-gray-700 border border-gray-300 focus:border-opacity-0 rounded-xl pl-4 pr-10 focus:outline-none focus:text-gray-100 focus:bg-gray-500 hover:shadow-lg" placeholder="Looking for..." autocomplete="off" />
+      <span class="absolute inset-y-0 right-0 flex items-center pr-6">
+        <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+      </span>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends "base.html" %}{% load static %}
+<span></span>
+{% block title %}Perahu Media | Home{% endblock %} {% block content %}
+<span></span>
+<div class="grid grid-cols-1 grid-rows-1 mx-3 my-1 md:mx-4 md:mt-2">
+  <div class="w-full flex justify-center h-60 border rounded-xl shadow-lg py-6 px-4">
+    <h1>Ini adalah rencana Header Post ...</h1>
+    
+  </div>
+</div>
+<div class="flex flex-col justify-center">
+  <div class="flex justify-center">
+    <!-- tbl prev -->
+    <div class="hidden lg:flex items-center ml-10 text-xl font-bold font-sans">
+      {% if page_obj.has_previous %}
+      <a href="?page=1" class="flex items-center justify-center pb-1 mx-1 border rounded-lg h-12 w-10 hover:bg-gray-200">&Lt;</a>
+      <a href="?page={{ page_obj.previous_page_number }}" class="flex items-center justify-center pb-1 mx-1 border rounded-lg h-12 w-10 hover:bg-gray-200">&LT;</a>
+      {% else %}
+      <div class="w-24 "></div>
+      {% endif %}
+    </div>
+    <!-- end -->
+    <!-- pos -->
+    <div class="flex flex-col items-center">
+      <div class="flex flex-col lg:grid lg:grid-cols-3 mx-6 my-3 md:mx-2 md:mt-10">
+        {% for post in page_obj %}
+        <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}/">
+          <div class="px-8 mx-3 py-3 my-2 h-60 sm:h-40 lg:h-60 border rounded-xl shadow-lg hover:bg-gray-200">
+            <ul>
+              <li class="py-2">{{ post.created_on|date:"d/m/Y" }}</li>
+              <li class="pb-0">{{ post.author }}</li>
+              <li class="font-semibold text-xl pb-2">{{ post.title|upper }}</li>
+              <div class="text-sm">
+                <p>{{ post.content|safe|truncatewords:16 }}</p>
+              </div>
+            </ul>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      <div class="hidden lg:block">
+        <span class="text-sm font-semibold flex items-center justify-center py-1 px-3 border rounded-lg h-10 shadow-lg"> {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} Display(s) </span>
+      </div>
+      <!-- <div>
+        {% for page in page_obj %}
+          {{ page_obj.number }}
+        {% endfor %}
+      </div> -->
+    </div>
+    <!-- end -->
+    <!-- tbl next -->
+    <div class="hidden lg:flex items-center mr-10 text-xl font-bold font-sans"">
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="flex items-center justify-center pb-1 mx-1 border rounded-lg h-12 w-10 hover:bg-gray-200">&GT;</a>
+      <a href="?page={{ page_obj.paginator.num_pages }}" class="flex items-center justify-center pb-1 mx-1 border rounded-lg h-12 w-10 hover:bg-gray-200">&Gt;</a>
+      {% else %}
+      <div class="w-24 "></div>
+      {% endif %}
+    </div>
+    <!-- end -->  
+  </div>
+
+  <!-- phone mode -->
+  <div class="flex justify-center items-center lg:hidden text-xl font-bold font-sans">
+    {% if page_obj.has_previous %}
+    <a href="?page=1" class="flex items-center justify-center pb-1 mx-1 border rounded-lg h-12 w-10 hover:bg-gray-200">&Lt;</a>
+    <a href="?page={{ page_obj.previous_page_number }}" class="flex items-center justify-center pb-1 mx-1 border rounded-lg h-12 w-10 hover:bg-gray-200">&LT;</a>  
+    {% else %}
+      <div class="w-24 "></div>
+      {% endif %}
+    <div class="items-center">
+      <span class="text-sm font-semibold flex items-center justify-center py-1 px-3 border rounded-lg h-12"> {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} </span>
+    </div>
+    {% if page_obj.has_next %}
+    <a href="?page={{ page_obj.next_page_number }}" class="flex items-center justify-center pb-1 mx-1 border rounded-lg h-12 w-10 hover:bg-gray-200">&GT;</a>
+    <a href="?page={{ page_obj.paginator.num_pages }}" class="flex items-center justify-center pb-1 mx-1 border rounded-lg h-12 w-10 hover:bg-gray-200">&Gt;</a>  
+    {% else %}
+      <div class="w-24 "></div>
+      {% endif %}
+  </div>
+  <!-- end -->
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}{% load static %}
+<span></span>
+{% block title %}PM | Daily{% endblock %} {% block content %}
+<div class="mx-20 mt-14">
+  <div class="flex-row">
+    {% if previous_day %}
+    <a href="/{{ previous_day|date:'Y' }}/{{ previous_day|date:'m' }}/{{ previous_day|date:'d' }}/">&lArr; Hari</a>
+    {% endif %} {{ day|date:"j F" }} {% if next_day %}
+    <a href="/{{ next_day|date:'Y' }}/{{ next_day|date:'m' }}/{{ next_day|date:'d' }}">Hari &rArr;</a>
+    {% endif %}
+  </div>
+  {% for post in object_list %}
+  <div class="font-semibold text-3xl">
+    <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}/">{{ post.title }}</a>
+  </div>
+  <div class="text-sm">
+    <p>{{ post.content|safe|truncatewords:100 }}</p>
+  </div>
+  {% endfor %}
+
+  <p>{% if previous_day and next_day %}--{% endif %}</p>
+</div>
+{% endblock %}

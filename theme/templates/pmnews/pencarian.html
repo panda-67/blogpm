@@ -1,0 +1,58 @@
+{% extends "base.html" %}{% load static %}
+<span></span>
+{% block title %}{{page_title}}{% endblock %}
+<span></span>
+{% block content %}
+
+<!-- This is component -->
+{% if cari %}
+<div class="container mx-auto my-5 flex flex-col items-center">
+  <div class="rounded-lg flex items-center justify-center md:shadow-xl md:h-14 w-2/3 mx-2">
+    <span class="font-sans font-semibold text-lg text-gray-700">Hasil pencarian untuk &Prime;{{ cari }}.&Prime;</span>
+  </div>
+  <div class="flex sm:hidden items-center justify-center rounded-xl my-2">
+    <form method="POST" action="{% url 'pencarian' %}">
+      <div class="relative text-gray-700 focus-within:text-gray-100">
+        {% csrf_token %}
+        <input type="search" name="cari" class="py-2 text-sm w-64 bg-gray-50 text-gray-700 border border-gray-300 focus:border-opacity-0 rounded-xl pl-4 pr-10 focus:outline-none focus:text-gray-100 focus:bg-gray-500 hover:shadow-lg" placeholder="Looking for..." autocomplete="off" />
+        <span class="absolute inset-y-0 right-0 flex items-center pr-2">
+          <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </button>
+        </span>
+      </div>
+    </form>
+  </div>
+</div>
+{% for pos in post %}
+<div class="container mx-auto my-5">
+  <a href="/{{ pos.created_on|date:'Y' }}/{{ pos.created_on|date:'m' }}/{{ pos.created_on|date:'d' }}/{{ pos.slug }}/" target="_blank">
+    <div class="relative rounded-lg flex flex-col justify-start shadow-xl md:h-40 m-4 md:m-10 p-12 md:pt-8 hover:bg-gray-200">
+      <h3 class="font-bold text-2xl text-gray-700">{{ pos.title }}</h3>
+      <p class="text-gray-600">{{ pos.content|safe|truncatewords:17 }}</p>
+      <div class="py-2"><span class="font-semibold text-sm">Read more</span><span class="text-xs ml-1">&#x279c;</span></div>
+    </div>
+  </a>
+</div>
+{% endfor %}
+<!-- End of component -->
+{% else %}
+<div class="container mx-auto my-5 flex justify-center">
+  <div class="relative rounded-lg flex justify-center items-center md:h-14 w-2/3 mt-8 mx-2">
+    <span class="font-sans font-semibold text-sm md:text-lg text-gray-700">Kamu belum melakukan pencarian!</span>
+  </div>
+</div>
+<div class="flex items-center justify-center rounded-xl my-16">
+  <form method="POST" action="{% url 'pencarian' %}">
+    <div class="relative text-gray-700 focus-within:text-gray-100">
+      {% csrf_token %}
+      <input type="search" name="cari" class="py-2 text-sm w-64 md:w-96 bg-gray-50 text-gray-700 border border-gray-300 focus:border-opacity-0 rounded-xl pl-4 pr-10 focus:outline-none focus:text-gray-100 focus:bg-gray-500 hover:shadow-lg" placeholder="Looking for..." autocomplete="off" />
+      <span class="absolute inset-y-0 right-0 flex items-center pr-2">
+        <button type="submit" class="p-1 focus:outline-none focus:shadow-outline">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </button>
+      </span>
+    </div>
+  </form>
+</div>
+{% endif %} {% endblock %}
