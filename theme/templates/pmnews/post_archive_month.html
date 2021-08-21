@@ -10,7 +10,7 @@
       <div class="px-8 mx-3 py-3 my-2 h-60 border rounded-xl shadow-lg hover:bg-gray-200">
         <ul>
           <li class="pb-8">{{ post.created_on|date:"d/m/Y" }}</li>
-          <li class="font-semibold text-xl py-2">{{ post.title }}</li>
+          <li class="font-semibold text-base py-2">{{ post.title }}</li>
           <div class="text-sm">
             <p>{{ post.content|safe|truncatewords:16 }}</p>
           </div>
@@ -20,8 +20,10 @@
     {% endfor %}
   </div>
   <div class="md:w-1/3">
-    <div class="border rounded-xl mt-6 px-6 py-3 shadow-lg h-auto top-10 fixed">
-      <a href="/arsip/"><h1 class="text-lg font-semibold">Arsip Postingan</h1></a>
+    <div class="border-l mt-10 px-8 py-3 h-screen top-14 fixed">
+      <a href="/arsip/">
+        <h1 class="text-lg font-semibold">Arsip Postingan</h1>
+      </a>
       <h2 class="text-base font-semibold">Tahun 2021</h2>
       <ul class="">
         <li><a href="/2021/08/">Agustus</a></li>
