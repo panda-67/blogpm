@@ -29,11 +29,11 @@
         <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}/">
           <div class="mx-1 my-2 h-90 sm:h-90 lg:h-90 border rounded-xl shadow-lg hover:bg-gray-100">
             <div class="rounded-t-xl h-40 bg-black bg-opacity-40 bg-cover" style="background-image: url('/media/{{ post.cover_img }}')"></div>     
-            <ul class="px-4 py-4 grid">
+            <ul class="px-4 py-4 grid h-60">
               <li class="text-base font-semibold pb-2">{{ post.title }}</li>  
               <span class="border-b border-solid border-black h-1 "></span>            
               <li class="text-sm">{{ post.content|safe|truncatewords:16 }}</li>
-              <li class="mt-6 px-2 pb-1 w-max rounded-lg bg-gray-200 text-sm font-medium">By: {{ post.author }} | <span class="text-xs font-normal">On: {{ post.created_on|date:"F j, Y" }}</span></li>
+              <li class="flex items-center mt-6 px-2 w-max h-8 rounded-lg bg-gray-200 text-sm font-medium">By: {{ post.author }} | <span class="text-xs font-normal">On: {{ post.created_on|date:"F j, Y" }}</span></li>
             </ul>         
           </div>        
         </a>
