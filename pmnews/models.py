@@ -19,7 +19,7 @@ class Post(models.Model):
     updated_on = models.DateTimeField(auto_now=True)
     cover_img = models.ImageField("Foto Sampul", upload_to='cover/', null=True, blank=True)
     content = models.TextField()
-    created_on = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateTimeField()
     status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
