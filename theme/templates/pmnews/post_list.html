@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load static %}
 <span></span>
 {% block title %}Perahu Media | Home{% endblock %} {% block content %}
 <span></span>
 <!-- Banner -->
 <div class="grid grid-cols-1 grid-rows-1 mx-3 my-1 md:mx-4 md:mt-2">
   <div class="flex justify-center ">
-    <div class="-mx-40 -mt-6 md:-mt-10 w-screen h-24 md:h-60 border shadow-xl inset-0 object-fill object-center bg-black bg-opacity-10 bg-cover bg-scroll bg-center md:bg-center" style="background-image: url('../../static/img/Banner.jpg'); background-blend-mode: multiply">
+    <div class="-mx-40 -mt-6 md:-mt-10 w-screen h-24 md:h-60 border shadow-xl inset-0 object-fill object-center bg-black bg-opacity-10 bg-cover bg-scroll bg-center md:bg-center" style="background-image: url('{% static 'img/Banner.jpg' %}'); background-blend-mode: multiply">
     </div>    
   </div>
 </div>
