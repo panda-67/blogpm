@@ -8,6 +8,7 @@ urlpatterns = [
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
     path('search/', views.pencarian, name='pencarian'),
+    path('tag/<slug:tag_slug>/',views.tag_list, name='tag_list'),
     path('', ArticleListView.as_view(), name='home'),
     path('arsip/',
          ArchiveIndexView.as_view(queryset=Post.objects.filter(

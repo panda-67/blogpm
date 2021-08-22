@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 STATUS = (
     (0, "Draft"),
@@ -17,11 +18,11 @@ class Post(models.Model):
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='blog_posts')
     updated_on = models.DateTimeField(auto_now=True)
-    cover_img = models.ImageField("Foto Sampul", upload_to='cover/', null=True, blank=True)
-    content = models.TextField()
+    cover_img = models.ImageField("Foto Sampul", upload_to='cover/', null=True, blank=True)    
     created_on = models.DateTimeField()
-    status = models.IntegerField(choices=STATUS, default=0)
-
+    status = models.IntegerField(choices=STATUS, default=1)
+    tags = TaggableManager()
+    content = models.TextField()
     class Meta:
         ordering = ['-created_on']
 

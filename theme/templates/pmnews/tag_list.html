@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+<span></span>
+{% block title %}PM | Tags{% endblock %} {% block content %} {% if tag %}
+<div class="container mx-auto my-5 flex flex-col items-center">
+  <div class="rounded-lg flex items-center justify-center md:shadow-xl md:h-14 w-2/3 mx-2">
+    <span class="font-sans font-semibold text-lg text-gray-700">Posts tagged with &Prime;{{ tag.name }}.&Prime;</span>
+  </div>
+  {% endif %} {% for pos in posts %}
+  <div class="container mx-auto my-5">
+    <a href="/{{ pos.created_on|date:'Y' }}/{{ pos.created_on|date:'m' }}/{{ pos.created_on|date:'d' }}/{{ pos.slug }}/" target="_blank">
+      <div class="relative rounded-lg flex flex-col justify-start shadow-xl md:h-40 m-4 md:m-10 p-12 md:pt-4 hover:bg-gray-200">
+        <h3 class="font-bold text-2xl text-gray-700">{{ pos.title }}</h3>
+        <div class="flex items-baseline">
+          <span class="text-sm font-bold text-gray-600">Tags:</span>
+          {% for tag in pos.tags.all %}
+          <a href="{% url 'tag_list' tag.slug %}" class="mx-1 px-2 pb-1 my-2 rounded-md bg-gray-600 text-xs font-semibold text-gray-100 inline-flex items-center justify-center"> {{tag.name|capfirst}} </a>
+          <!-- {% if not forloop.last %}, {% endif %}  -->
+          {% endfor %}
+        </div>
+        <p class="text-gray-600">{{ pos.content|safe|truncatewords:17 }}</p>
+        <div class="py-2"><span class="font-semibold text-sm">Read more</span><span class="text-xs ml-1">&#x279c;</span></div>
+      </div>
+    </a>
+  </div>
+</div>
+{% endfor %} {% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.utils import timezone
 from django.views.generic.dates import MonthArchiveView, DayArchiveView
 from django.views.generic.detail import DetailView
@@ -7,6 +8,7 @@ from django.views.generic import ListView
 from django.core.paginator import Paginator
 from django.db.models import Q
 from pmnews.models import Post
+from taggit.models import Tag
 # Create your views here.
 
 # def index(request):
@@ -29,9 +31,10 @@ def contact(request):
 
 
 def pencarian(request):
+    now = timezone.now()
     if request.method == "POST":
         cari = request.POST.get('cari')
-        posts = Post.objects.filter(
+        posts = Post.objects.filter(status=1).filter(created_on__lte=now).filter(
             Q(title__icontains=cari) | Q(content__icontains=cari))
         context = {'cari': cari, 'post': posts, 'page_title': "PM | Cari", }
         return render(request, "pmnews/pencarian.html", context)
@@ -39,29 +42,42 @@ def pencarian(request):
         return render(request, "pmnews/pencarian.html")
 
 
+def tag_list(request, tag_slug=None):   
+    tag = None
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        posts = Post.objects.filter(tags__in=[tag])
+   
+    return render(request,'pmnews/tag_list.html',{'posts':posts, 'tag':tag})
+
 class ArticleMonthArchiveView(MonthArchiveView):
-    queryset = Post.objects.all()
+    now = timezone.now()
+    queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     date_field = "created_on"
     allow_future = True
     month_format = '%m'
 
 
 class ArticleDayArchiveView(DayArchiveView):
-    queryset = Post.objects.all()
+    now = timezone.now()
+    queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     date_field = "created_on"
     allow_future = True
     month_format = '%m'
 
 
 class DateDetailView(DetailView):
-    model = Post
+    now = timezone.now()
+    queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     date_field = "created_on",
     allow_future = True
     month_format = '%m'
 
 
 class ArticleListView(ListView):
-    queryset = Post.objects.filter(status=1).exclude()
+    
+    now = timezone.now()
+    queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     paginate_by = 3
 
     # def get(self, request):
