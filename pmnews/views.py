@@ -9,7 +9,9 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from pmnews.models import Post
 from taggit.models import Tag
+from hitcount.views import HitCountDetailView
 # Create your views here.
+now = timezone.now()
 
 # def index(request):
 #     posts = Post.objects.all().filter(status=1)
@@ -31,7 +33,6 @@ def contact(request):
 
 
 def pencarian(request):
-    now = timezone.now()
     if request.method == "POST":
         cari = request.POST.get('cari')
         posts = Post.objects.filter(status=1).filter(created_on__lte=now).filter(
@@ -46,12 +47,10 @@ def tag_list(request, tag_slug=None):
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
-        posts = Post.objects.filter(tags__in=[tag])
-   
+        posts = Post.objects.filter(tags__in=[tag])   
     return render(request,'pmnews/tag_list.html',{'posts':posts, 'tag':tag})
 
 class ArticleMonthArchiveView(MonthArchiveView):
-    now = timezone.now()
     queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     date_field = "created_on"
     allow_future = True
@@ -59,26 +58,31 @@ class ArticleMonthArchiveView(MonthArchiveView):
 
 
 class ArticleDayArchiveView(DayArchiveView):
-    now = timezone.now()
     queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     date_field = "created_on"
     allow_future = True
     month_format = '%m'
 
 
-class DateDetailView(DetailView):
-    now = timezone.now()
+class DateDetailView(HitCountDetailView, DetailView):
     queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     date_field = "created_on",
     allow_future = True
     month_format = '%m'
+    count_hit = True
 
+    def get_context_data(self, **kwargs):
+        context = super(DateDetailView, self).get_context_data(**kwargs)
+        context.update({
+        'popular_posts': Post.objects.filter(status=1).filter(created_on__lte=now).order_by('-hit_count_generic__hits')[:3],
+        })
+        return context
 
 class ArticleListView(ListView):
-    
-    now = timezone.now()
     queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     paginate_by = 3
+
+    
 
     # def get(self, request):
     #     posts = Post.objects.all().filter(status=1)

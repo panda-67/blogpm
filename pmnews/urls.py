@@ -1,8 +1,11 @@
 from django.urls import path
+from django.utils import timezone
 from django.views.generic.dates import ArchiveIndexView, DateDetailView
 from . import views
 from pmnews.views import *
 from pmnews.models import *
+
+now = timezone.now()
 
 urlpatterns = [
     path('about/', views.about, name='about'),
@@ -12,7 +15,7 @@ urlpatterns = [
     path('', ArticleListView.as_view(), name='home'),
     path('arsip/',
          ArchiveIndexView.as_view(queryset=Post.objects.filter(
-             status=1), date_field="created_on"),
+             status=1).filter(created_on__lte=now), date_field="created_on"),
          name="article_archive"),
     path('<int:year>/<int:month>/',
          ArticleMonthArchiveView.as_view(),
