@@ -9,7 +9,7 @@
     <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}/">
       <div class="px-8 mx-3 py-3 my-2 lg:h-60 border rounded-xl shadow-lg hover:bg-gray-200 h-72">
         <ul>
-          <li class="pb-8">{{ post.created_on|date:"d/m/Y" }}</li>
+          <li class="pb-2">{{ post.created_on|date:"d/m/Y" }}</li>
           <li class="font-semibold text-base py-2">{{ post.title }}</li>
           <div class="text-sm">
             <p>{{ post.content|safe|truncatewords:15 }}</p>
@@ -29,6 +29,17 @@
         <li><a href="/2021/10/">Oktober</a></li>
         <li><a href="/2021/11/">November</a></li>
       </ul>
+      <div class="flex items-center mt-2">
+        <svg class="w-8 mx-2" viewBox="0 0 393.89 342.41">
+          <path
+            d="M389.22,52.63a27.08,27.08,0,0,0-14.48-11.56s0,0,0,0L261.07,2.11H261A27,27,0,0,0,238.4,4.3L14.33,133.66A27.53,27.53,0,0,0,4.27,171.21L94.84,328.08a27.56,27.56,0,0,0,37.55,10.06L356.46,208.78a27.09,27.09,0,0,0,13.22-18.49v0L392.8,72.35s0,0,0,0a27.13,27.13,0,0,0-2.91-18.58c-.21-.37-.43-.76-.65-1.12ZM353.31,74.28a25.92,25.92,0,1,1-35.39-9.51,25.87,25.87,0,0,1,35.39,9.51Z"
+          />
+        </svg>
+        {% for post in latest %} {% for tag in post.tags.all %}
+        <a href="{% url 'tag_list' tag.slug %}" class="mx-1 px-2 pb-1 my-2 rounded-md bg-gray-600 text-xs font-semibold text-gray-100 inline-flex items-center justify-center"> {{tag.name|capfirst}} </a>
+        <!-- {% if not forloop.last %}, {% endif %}  -->
+        {% endfor %} {% endfor %}
+      </div>
     </div>
   </div>
 </div>
