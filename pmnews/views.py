@@ -75,6 +75,7 @@ class DateDetailView(HitCountDetailView, DetailView):
         context = super(DateDetailView, self).get_context_data(**kwargs)
         context.update({
         'popular_posts': Post.objects.filter(status=1).filter(created_on__lte=now).order_by('-hit_count_generic__hits')[:3],
+        # 'pop':Post.objects.filter('created_on'),
         })
         return context
 

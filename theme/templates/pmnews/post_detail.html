@@ -10,68 +10,167 @@
     background-size: cover;
   }
   main {
-    min-width: 78%;
+    /* min-width: 78%; */
   }
   @media (min-width: 640px) {
     .kofer {
       background: white url("/media/{{ post.cover_img }}") no-repeat center;
       background-size: cover;
-      /* border-bottom-right-radius: 1rem;
-      border-bottom-left-radius: 1rem; */
+      background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7));
     }
     main {
-      max-width: 100vw;
+      /* max-width: 100vw; */
     }
   }
 </style>
 
-<div class="relative rounded-lg flex flex-col md:flex-row overflow-x-none items-center -pt-6 md:-top-11 md:shadow-xl md:h-auto mx-2 pb-12">
-  <div class="max-w-screen-xl mx-auto">
-    <main class="font-sans mt-10 sm:w-max">
-      <div class="mb-4 md:mb-0 w-full max-w-screen-md mx-auto relative" style="height: 24em">
-        <div class="absolute rounded-b-2xl md:rounded-b-3xl left-0 bottom-0 w-full h-full z-10" style="background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7))"></div>
-        <div class="kofer h-full rounded-b-2xl md:rounded-b-3xl"></div>
-        <div class="p-4 absolute bottom-0 left-0 z-20">
-          <h2 class="text-2xl md:text-4xl font-semibold text-gray-100 leading-tight">{{ post.title }}</h2>
-          <p>Views: {% get_hit_count for post %}</p>
-          <div class="flex items-center">
-            <svg class="w-8 mx-2" viewBox="0 0 393.89 342.41">
-              <path
-                d="M389.22,52.63a27.08,27.08,0,0,0-14.48-11.56s0,0,0,0L261.07,2.11H261A27,27,0,0,0,238.4,4.3L14.33,133.66A27.53,27.53,0,0,0,4.27,171.21L94.84,328.08a27.56,27.56,0,0,0,37.55,10.06L356.46,208.78a27.09,27.09,0,0,0,13.22-18.49v0L392.8,72.35s0,0,0,0a27.13,27.13,0,0,0-2.91-18.58c-.21-.37-.43-.76-.65-1.12ZM353.31,74.28a25.92,25.92,0,1,1-35.39-9.51,25.87,25.87,0,0,1,35.39,9.51Z"
-              />
-            </svg>
-            {% for tag in post.tags.all %}
-            <a href="{% url 'tag_list' tag.slug %}" class="px-2 pb-1 my-2 rounded-md bg-gray-300 text-xs font-semibold text-gray-700 inline-flex items-center justify-center hover:bg-gray-100"> {{tag.name|capfirst}} </a>
-            <!-- {% if not forloop.last %}, {% endif %}  -->
-            {% endfor %}
-          </div>
-          <div class="flex flex-col md:flex-row mt-3 justify-center">
-            <div class="flex flex-col ml-1 font-mono font-extrabold md:font-bold">
-              <div class="flex items-center justify-start mb-2">
-                <svg class="w-5 rounded-full mr-2 object-cover" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; fill: whitesmoke">
-                  <path
-                    d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z"
-                  ></path>
-                </svg>
-                <p class="text-gray-200 text-sm">Ditulis oleh: <span class="text-gray-200 text-sm md:text-base">{{ post.author|capfirst }}</span></p>
+<div class="flex flex-col md:flex-row overflow-x-none mx-2 md:mx-10 lg:mx-14">
+  <div class="relative rounded-lg flex flex-col md:flex-row items-center -pt-6 md:-top-11 md:shadow-xl md:h-auto mx-2 pb-12 md:w-3/4">
+    <div class="mx-auto">
+      <main class="font-sans mt-10">
+        <!-- head -->
+        <div class="mb-4 px-4">
+          <div class="flex items-end rounded-b-2xl md:rounded-b-3xl h-80 bg-cover bg-black bg-opacity-40" style="background-image: url('/media/{{ post.cover_img }}'); background-blend-mode: multiply;">
+            <!-- <div class="z-10 bg-gradient-to-r from-black to-white bg-opacity-60 bg-blend-multiply"></div> -->
+            <div class="flex flex-col p-4 z-20">
+              <h2 class="py-3 text-2xl md:text-3xl font-semibold text-gray-50 leading-tight">{{ post.title }}</h2>
+              <!-- hit_c & tags -->
+              <div class="flex items-center">
+                <p class="flex items-center w-max h-6 pr-2 rounded-lg font-mono font-semibold text-base">
+                  <svg class="w-7 mx-2" viewBox="0 0 488.85 488.85" style="enable-background: new 0 0 488.85 488.85; fill: rgb(255, 255, 255)" xml:space="preserve">
+                    <path
+                      d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
+                s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025
+                c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
+                C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7
+                c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"
+                    />
+                  </svg>
+                  <span class="px-2 rounded-md bg-gray-100 text-sm font-semibold text-gray-700">{% get_hit_count for post %}</span>
+                </p>
+                <div class="flex items-center">
+                  <svg class="w-6 mx-2" viewBox="0 0 393.89 342.41" style="enable-background: new 0 0 488.85 488.85; fill: rgb(255, 255, 255)" xml:space="preserve">
+                    <path
+                      d="M389.22,52.63a27.08,27.08,0,0,0-14.48-11.56s0,0,0,0L261.07,2.11H261A27,27,0,0,0,238.4,4.3L14.33,133.66A27.53,27.53,0,0,0,4.27,171.21L94.84,328.08a27.56,27.56,0,0,0,37.55,10.06L356.46,208.78a27.09,27.09,0,0,0,13.22-18.49v0L392.8,72.35s0,0,0,0a27.13,27.13,0,0,0-2.91-18.58c-.21-.37-.43-.76-.65-1.12ZM353.31,74.28a25.92,25.92,0,1,1-35.39-9.51,25.87,25.87,0,0,1,35.39,9.51Z"
+                    />
+                  </svg>
+                  {% for tag in post.tags.all %}
+                  <a href="{% url 'tag_list' tag.slug %}" class="px-2 pb-1 my-2 rounded-md bg-gray-100 text-xs font-semibold text-gray-700 inline-flex items-center justify-center hover:bg-gray-100">
+                    {{tag.name|capfirst}}
+                  </a>
+                  <!-- {% if not forloop.last %}, {% endif %}  -->
+                  {% endfor %}
+                </div>
               </div>
-              <p class="text-gray-300 text-xs md:text-xs ml-1">Pada: {{ post.created_on|date:"d-m-Y" }} | <span>{{ post.created_on|time }}</span></p>
-              <p class="text-gray-300 text-xs md:text-xs ml-1">Edit: {{ post.updated_on|date:"d-m-Y" }} | <span>{{ post.updated_on|time }}</span></p>
-            </div>
-            <div class="font-mono text-gray-200 text-sm font-medium md:text-base flex justify-center items-center md:ml-40 md:h-6 px-2 md:px-3 mt-3 hover:bg-gray-100 hover:text-gray-600 rounded-lg">
-              <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/">Artikel Tanggal: {{ post.created_on|date:"j-m-Y" }}</a>
+              <!-- end -->
+              <!-- Author -->
+              <div class="flex flex-col lg:flex-row mt-3 justify-center items-start lg:items-end md:space-x-2 lg:space-x-20">
+                <div class="flex flex-col ml-1 font-mono font-extrabold md:font-black text-gray-50">
+                  <div class="flex items-center justify-start mb-2">
+                    <svg
+                      class="w-5 rounded-full mr-2 object-cover"
+                      viewBox="0 0 32 32"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      role="presentation"
+                      focusable="false"
+                      style="display: block; fill: whitesmoke"
+                    >
+                      <path
+                        d="m16 .7c-8.437 0-15.3 6.863-15.3 15.3s6.863 15.3 15.3 15.3 15.3-6.863 15.3-15.3-6.863-15.3-15.3-15.3zm0 28c-4.021 0-7.605-1.884-9.933-4.81a12.425 12.425 0 0 1 6.451-4.4 6.507 6.507 0 0 1 -3.018-5.49c0-3.584 2.916-6.5 6.5-6.5s6.5 2.916 6.5 6.5a6.513 6.513 0 0 1 -3.019 5.491 12.42 12.42 0 0 1 6.452 4.4c-2.328 2.925-5.912 4.809-9.933 4.809z"
+                      ></path>
+                    </svg>
+                    <p class="text-sm">Ditulis oleh: <span class="text-sm md:text-base">{{ post.author|capfirst }}</span></p>
+                  </div>
+                  <p class="text-sm md:text-base ml-1">Pada: {{ post.created_on|date:"d-m-Y" }} | <span>{{ post.created_on|time }}</span></p>
+                  <p class="text-sm md:text-base ml-1">Edit: {{ post.updated_on|date:"d-m-Y" }} | <span>{{ post.updated_on|time }}</span></p>
+                </div>
+              </div>
+              <!-- end -->
             </div>
           </div>
         </div>
+        <!-- end -->
+        <!-- content -->
+        <div class="px-4 md:px-6 mt-12 text-gray-700 mx-4 text-sm md:text-base leading-relaxed">{{ post.content|safe }}</div>
+        <!-- end -->
+      </main>
+    </div>
+  </div>
+  <div class="m-2 p-3 md:w-1/4">
+    <div class="font-sans text-black bg-gray-200 text-sm font-semibold md:text-base flex items-center lg:h-6 px-3 pt-1 pb-2 mb-3 lg:px-3 hover:bg-black hover:text-gray-100 rounded-lg">
+      <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/">Artikel: {{ post.created_on|date:"j-m-Y" }}</a>
+    </div>
+    <div class="h-12 py-1 w-max border-b border-gray-900">
+      <h3 class="text-2xl font-bold mx-2 px-1">Popular Posts</h3>
+    </div>
+    <div class="py-4">
+      {% for p in popular_posts %}
+      <div class="hover:bg-gray-100">
+        <a href="/{{ p.created_on|date:'Y' }}/{{ p.created_on|date:'m' }}/{{ p.created_on|date:'d' }}/{{ p.slug }}/">
+          <ul class="px-4 py-4 grid h-60">
+            <li class="text-base font-semibold pb-2">{{ p.title }}</li>
+            <span class="border-b border-solid border-black h-1"></span>
+            <li class="text-sm">{{ p.content|safe|truncatewords:16 }}</li>
+            <!--Author  -->
+            <li class="flex items-center mt-4 pr-2 w-max h-8 rounded-lg bg-gray-200 font-sans">
+              <svg viewBox="0 0 512 512" class="w-5 mx-2" style="fill: rgb(167, 152, 152)">
+                <path
+                  d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48ZM205.78,164.82C218.45,151.39,236.28,144,256,144s37.39,7.44,50.11,20.94C319,178.62,325.27,197,323.79,216.76,320.83,256,290.43,288,256,288s-64.89-32-67.79-71.25C186.74,196.83,193,178.39,205.78,164.82ZM256,432a175.49,175.49,0,0,1-126-53.22,122.91,122.91,0,0,1,35.14-33.44C190.63,329,222.89,320,256,320s65.37,9,90.83,25.34A122.87,122.87,0,0,1,382,378.78,175.45,175.45,0,0,1,256,432Z"
+                />
+              </svg>
+              <span class="text-sm font-medium">{{ p.author|capfirst }}</span>
+              <svg class="w-4 mx-2" viewBox="0 0 500 500" style="enable-background: new 0 0 500 500; fill: rgb(167, 152, 152)" xml:space="preserve">
+                <path
+                  d="M453.584,69.784h-16.576v-9.648c0-4.352-3.528-7.876-7.876-7.876c-4.344,0-7.872,3.52-7.872,7.876v9.648h-43.308v-9.648
+                    c0-4.352-3.528-7.876-7.876-7.876c-4.348,0-7.876,3.52-7.876,7.876v9.648h-43.3v-9.648c0-4.352-3.528-7.876-7.876-7.876
+                    c-4.348,0-7.876,3.52-7.876,7.876v9.648h-47.24v-9.648c0-4.352-3.528-7.876-7.876-7.876c-4.348,0-7.872,3.52-7.872,7.876v9.648
+                    h-39.372v-9.648c0-4.352-3.524-7.876-7.872-7.876c-4.348,0-7.876,3.52-7.876,7.876v9.648h-43.308v-9.648
+                    c0-4.352-3.524-7.876-7.876-7.876c-4.348,0-7.872,3.52-7.872,7.876v9.648H82.676v-9.648c0-4.352-3.524-7.876-7.876-7.876
+                    c-4.348,0-7.872,3.52-7.872,7.876v9.648H49.96C22.44,69.784,0,94.336,0,121.868v277.468c0,27.528,22.44,48.404,49.964,48.404
+                    h403.62c27.52,0,46.416-20.876,46.416-48.404V121.868C500,94.336,481.1,69.784,453.584,69.784z M484.252,399.332
+                    c0,18.848-11.832,32.66-30.668,32.66H49.964c-18.84,0-34.216-13.812-34.216-32.656V124.904h468.504V399.332z"
+                />
+                <path
+                  d="M468.504,169.988c0-4.348,0.124-9.652-4.224-9.652H39.34c-4.348,0-11.78,5.304-11.78,9.652v46.444
+                    c0,0.264-0.08,0.52-0.08,0.8c0,0.28,0.08,0.536,0.08,0.8v45.644c0,0.264-0.08,0.524-0.08,0.8s0.08,0.532,0.08,0.8v45.644
+                    c0,0.264-0.08,0.52-0.08,0.8c0,0.28,0.08,0.536,0.08,0.8v45.644c0,0.264-0.08,0.524-0.08,0.8s0.08,0.532,0.08,0.8v46.444
+                    c0,4.348,7.432,6.096,11.78,6.096h424.94c4.348,0,4.224-1.748,4.224-6.096V169.988z M326.772,176.088h55.116v31.496h-55.116
+                    V176.088z M185.04,176.088h55.12v31.496h-55.12V176.088z M185.04,223.328h55.12v31.496h-55.12V223.328z M185.04,270.576h55.12
+                    v31.496h-55.12V270.576z M114.172,176.088h55.116v31.496h-55.116V176.088z M114.172,270.576h55.116v31.496h-55.116V270.576z
+                    M114.172,317.816h55.116v31.496h-55.116V317.816z M43.304,176.084h55.12v31.496h-55.12V176.084z M43.304,223.328h55.12v31.496
+                    h-55.12V223.328z M43.304,270.576h55.12v31.496h-55.12V270.576z M98.428,396.56h-55.12v-31.496h55.12V396.56z M98.428,349.312
+                    h-55.12v-31.496h55.12V349.312z M169.292,396.56h-55.12v-31.496h55.12V396.56z M169.292,254.824h-55.12v-31.496h55.12V254.824z
+                    M240.16,396.56h-55.12v-31.496h55.12V396.56z M240.16,349.312h-55.12v-31.496h55.12V349.312z M311.024,396.56h-55.116v-31.496
+                    h55.116V396.56z M311.024,349.312h-55.116v-31.496h55.116V349.312z M311.024,302.072h-55.116v-31.496h55.116V302.072z
+                    M311.024,254.824h-55.116v-31.496h55.116V254.824z M311.024,207.584h-55.116v-31.496h55.116V207.584z M381.888,396.56h-55.116
+                    v-31.496h55.116V396.56z M381.888,349.312h-55.116v-31.496h55.116V349.312z M381.888,302.072h-55.116v-31.496h55.116V302.072z
+                    M326.772,254.824v-31.496h55.116v31.496H326.772z M452.756,396.556h-55.12V365.06h55.12V396.556z M452.756,349.312h-55.12
+                    v-31.496h55.12V349.312z M452.756,302.072h-55.12v-31.496h55.12V302.072z M452.756,254.824h-55.12v-31.496h55.12V254.824z
+                    M452.756,207.584h-55.12v-31.496h55.12V207.584z"
+                />
+              </svg>
+              <span class="text-xs font-normal">{{ p.created_on|date:"F j, Y" }}</span>
+              <svg class="w-5 mx-2" viewBox="0 0 488.85 488.85" style="enable-background: new 0 0 488.85 488.85; fill: rgb(167, 152, 152)" xml:space="preserve">
+                <path
+                  d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
+                s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025
+                c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
+                C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7
+                c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"
+                />
+              </svg>
+              <span class="text-sm font-medium">{% get_hit_count for p %}</span>
+            </li>
+            <!-- end -->
+          </ul>
+        </a>
       </div>
-      <div class="px-4 lg:px-0 mt-12 text-gray-700 max-w-xs md:max-w-screen-md mx-auto text-sm md:text-base leading-relaxed">{{ post.content|safe }}</div>
-    </main>
+      {% endfor %}
+    </div>
   </div>
 </div>
-<h3>Popular Posts</h3>
-{% for p in popular_posts %}
-<p>{{p.title}}</p>
-{% endfor %}
+<!-- footnote -->
 <div class="flex items-center justify-center rounded-xl my-6">
   <a href="#top" class="py-2 px-4 font-black text-sm bg-gray-50 text-gray-700 border border-gray-300 hover:bg-gray-600 hover:text-gray-50 rounded-xl">&uarr;</a>
   <form method="POST" action="{% url 'pencarian' %}">
@@ -92,4 +191,5 @@
     </div>
   </form>
 </div>
+<!-- end -->
 {% endblock %}
