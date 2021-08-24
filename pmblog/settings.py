@@ -47,8 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
 TAILWIND_APP_NAME = 'theme'
+
 TAGGIT_CASE_INSENSITIVE = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
 
@@ -87,10 +90,22 @@ WSGI_APPLICATION = 'pmblog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    'ENGINE': 'django.db.backends.sqlite3',
+    'NAME': BASE_DIR / 'db.sqlite3',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'blogpm',
+    #     'HOST': '127.0.0.1',
+    #     'PORT': '3306',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'OPTIONS': {
+    #     'autocommit': True,
+    #     },
+    # }
 }
+
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
@@ -119,6 +134,8 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Asia/Bangkok'
+
+# TIME_ZONE = 'UTC'
 
 USE_I18N = True
 

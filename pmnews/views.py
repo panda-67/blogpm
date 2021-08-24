@@ -55,6 +55,7 @@ class ArticleMonthArchiveView(MonthArchiveView):
     date_field = "created_on"
     allow_future = True
     month_format = '%m'
+    now
 
 
 class ArticleDayArchiveView(DayArchiveView):
