@@ -137,6 +137,12 @@
   <!-- {% if not forloop.last %}, {% endif %}  -->
   {% endfor %} {% endfor %}
 </div>
+{% for t in tg %}
+  {{t.name|capfirst}}
+{% endfor %}
+<div>
+
+</div>
 <!-- end -->
 
 {% endblock %}

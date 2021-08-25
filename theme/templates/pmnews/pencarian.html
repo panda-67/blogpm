@@ -35,7 +35,7 @@
 {% for pos in post %}
 <div class="container mx-auto my-5">
   <a href="/{{ pos.created_on|date:'Y' }}/{{ pos.created_on|date:'m' }}/{{ pos.created_on|date:'d' }}/{{ pos.slug }}/" target="_blank">
-    <div class="relative rounded-lg flex flex-col justify-start shadow-xl md:h-40 m-4 md:m-10 p-12 md:pt-3 hover:bg-gray-200">
+    <div class="relative rounded-lg flex flex-col justify-start shadow-xl md:h-55 m-4 md:m-10 p-12 md:mt-4 hover:bg-gray-200">
       <h3 class="font-bold text-2xl text-gray-700">{{ pos.title }}</h3>
       <div class="flex items-center mt-2">
         <svg class="w-8 mx-2" viewBox="0 0 393.89 342.41">
