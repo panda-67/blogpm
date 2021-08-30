@@ -67,3 +67,4 @@ class DateDetailView(HitCountDetailView, DetailView):
 class Home(ListView):
     queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     paginate_by = 3
+    template_name = 'pmnews/index.html'
