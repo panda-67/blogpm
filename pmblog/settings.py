@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-import django_heroku
+import django_on_heroku
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -164,4 +164,4 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
-django_heroku.settings(locals())
+django_on_heroku.settings(locals())
