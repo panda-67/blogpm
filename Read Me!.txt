@@ -1,0 +1,16 @@
+/// Solution 4: error mysqlclient ///
+
+""" For pip """
+
+$ pip install pymysql
+
+""" For pip3 you should use """
+
+$ python3 -m pip install PyMySQL
+
+# Then, edit the init.py file in your project origin directory (the same as settings.py). Add:
+
+# import pymysql
+
+# pymysql.install_as_MySQLdb()
+
