@@ -1,4 +1,4 @@
-{% extends "base.html" %}{% load hitcount_tags %}
+{% extends "base.html" %}{% load hitcount_tags social_share %}
 <span></span>
 {% block title %}PM | News{% endblock %}
 <span></span>
@@ -71,6 +71,18 @@
               <!-- end -->
             </div>
           </div>
+        </div>
+        <!-- end -->
+        <!-- social share -->
+        <div class="flex mx-5 justify-around">
+          {% post_to_whatsapp object_or_url "Share via WhatsApp" %}
+          {% post_to_telegram "PM | {{post.title}}" object_or_url %}
+          {% post_to_facebook object_or_url "Post to Facebook!" %}
+          {% post_to_twitter "New Song: {{object.title}}. Check it out!" object_or_url "Post to Twitter" %}
+          {% post_to_linkedin object_or_url %}
+          {% save_to_pinterest object_or_url %}
+          {% post_to_reddit "New Song: {{object.title}}" object_or_url %}
+          {% send_email object.title "New Song: {{object.title}}. Check it out!" object_or_url "Share via email" %}
         </div>
         <!-- end -->
         <!-- content -->

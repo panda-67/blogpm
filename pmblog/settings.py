@@ -33,6 +33,9 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+
+    # 'social_widgets',
+    'django_social_share',
     'hitcount',
     'taggit',
     'widget_tweaks',
