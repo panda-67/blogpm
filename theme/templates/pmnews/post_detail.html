@@ -72,16 +72,37 @@
           </div>
         </div>
         <!-- end -->
-        <!-- social share -->
-        <div class="flex mx-5 justify-around">
-          <p>{% post_to_whatsapp object_or_url "Share via WhatsApp" %}</p>
-          <p>{% post_to_telegram "PM | {{post.title}}" object_or_url %}</p>
-          <p>{% post_to_facebook object_or_url "Post to Facebook!" %}</p>
-          <p>{% post_to_twitter "New Song: {{object.title}}. Check it out!" object_or_url "Post to Twitter" %}</p>
-          <p>{% post_to_linkedin object_or_url %}</p>
-          <p>{% save_to_pinterest object_or_url %}</p>
-          <p>{% post_to_reddit "New Song: {{object.title}}" object_or_url %}</p>
-          <p>{% send_email object.title "New Song: {{object.title}}. Check it out!" object_or_url "Share via email" %}</p>
+        <!-- social share --> 
+        <div class="mx-10 my-3">
+          <div>
+            <span>Share Post Via:</span>
+          </div>
+          <div class="flex mx-2"> 
+            <div class="mx-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">      
+              <p>{% post_to_whatsapp object_or_url "<p style='color: rgb(3, 158, 49); font-weight:400;'>Whatsapp</p>" %}</p>
+            </div>  
+            <div class="mx-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">    
+              <p>{% post_to_telegram "PM | {{post.title}}" object_or_url "<p style='color: rgb(34, 80, 233); font-weight:semibold;'>Telegram</p>" %}</p>
+            </div>  
+            <div class="mx-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">    
+              <p>{% post_to_facebook object_or_url "<p style='color: rgb(1, 52, 219); font-weight:semibold;'>Facebook</p>" %}</p>
+            </div>  
+            <div class="mx-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">     
+              <p>{% post_to_twitter "New Song: {{object.title}}. Check it out!" object_or_url "<p style='color: #3763f5; font-weight:400;'>Twitter</p>" %}</p>
+            </div>  
+            <div class="mx-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">
+              <p>{% post_to_linkedin object_or_url %}</p>
+            </div>  
+            <div class="mx-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">       
+              <p>{% save_to_pinterest object_or_url "<p style='color: #f70000; font-weight:400;'>Pinterest</p>" %}</p>
+            </div>  
+            <div class="mx-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">    
+              <p>{% post_to_reddit "New Song: {{object.title}}" object_or_url "<p style='color: rgb(230, 0, 0); font-weight:semibold;'>Reddit</p>" %}</p>
+            </div>  
+            <div class="mx-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">    
+              <p>{% send_email object.title "New Song: {{object.title}}. Check it out!" object_or_url "<p style='color: rgb(255, 196, 0); font-weight:semibold;'>Email</p>" %}</p>
+            </div>  
+          </div>
         </div>
         <!-- end -->
         <!-- content -->

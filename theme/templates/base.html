@@ -1,4 +1,4 @@
-{% load static tailwind_tags %}
+{% load static tailwind_tags social_share %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,6 +12,7 @@
 
     <link rel="icon" href="{% static 'img/Logo.svg' %}" type="image/gif" sizes="14 x 14" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
   </head>
 
   <body class="bg-grey-lightest font-sans leading-normal tracking-normal pt-16">
@@ -57,7 +58,10 @@
                 <g id="Layer_2" data-name="Layer 2">
                   <g id="Layer_1-2" data-name="Layer 1">
                     <g id="Layer_6" data-name="Layer 6">
-                      <path class="cls-1" d="M73.26,131.55H15.19a178,178,0,0,0-4.88,25.86,118.51,118.51,0,0,0,51.52,45.24c1.24.54,2.48,1.09,3.69,1.6,2,.62,3.9,1.2,5.87,1.72a213.65,213.65,0,0,1,.23-65.47C72.1,137.49,72.66,134.51,73.26,131.55Z" />
+                      <path
+                        class="cls-1"
+                        d="M73.26,131.55H15.19a178,178,0,0,0-4.88,25.86,118.51,118.51,0,0,0,51.52,45.24c1.24.54,2.48,1.09,3.69,1.6,2,.62,3.9,1.2,5.87,1.72a213.65,213.65,0,0,1,.23-65.47C72.1,137.49,72.66,134.51,73.26,131.55Z"
+                      />
                       <path class="cls-2" d="M187,147.05a168.13,168.13,0,0,0,22.19,27.54,122.88,122.88,0,0,1-27.46,22.29S186,156.5,187,147.05Z" />
                       <path
                         class="cls-1"
@@ -85,7 +89,10 @@
                       />
                       <path class="cls-3" d="M373.25,74.11H353.89L350.47,83H333L355.27,32h16.89L394.43,83H376.67Zm-4.73-12.37-4.95-12.81-4.95,12.81Z" />
                       <path class="cls-3" d="M447.43,32V83H430.25V64.21H414.38V83H397.2V32h17.18V50.09h15.87V32Z" />
-                      <path class="cls-3" d="M461.84,77.82q-6.55-6.33-6.56-17.76V32h17.18V59.55q0,5.61,2,8.16a7.86,7.86,0,0,0,11.57,0q2-2.55,2-8.16V32h16.89v28q0,11.43-6.55,17.76t-18.27,6.34Q468.38,84.16,461.84,77.82Z" />
+                      <path
+                        class="cls-3"
+                        d="M461.84,77.82q-6.55-6.33-6.56-17.76V32h17.18V59.55q0,5.61,2,8.16a7.86,7.86,0,0,0,11.57,0q2-2.55,2-8.16V32h16.89v28q0,11.43-6.55,17.76t-18.27,6.34Q468.38,84.16,461.84,77.82Z"
+                      />
                     </g>
                   </g>
                 </g>
@@ -190,6 +197,9 @@
         <!-- end search bar -->
 
         <!-- login -->
+        <div class="flex justify-center items-center ml-1 px-3 h-10 hover:shadow-xl rounded-xl border">
+          <a href="{% url 'login' %}">Log In</a>
+        </div>
         <div class="flex justify-center items-center ml-1 w-12 h-10 hover:shadow-xl rounded-xl border">
           <a href="/admin/">
             <div class="w-8">
@@ -301,6 +311,6 @@
       </div>
     </section>
     <!-- End of footer -->
-    {% block attribute %}{% endblock %}
+    {% block attribute %}{% endblock %} {% add_pinterest_script %}
   </body>
 </html>

@@ -162,6 +162,10 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
+LOGIN_REDIRECT_URL = '/admin'
+
+LOGOUT_REDIRECT_URL = '/login'
+
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"

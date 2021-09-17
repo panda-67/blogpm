@@ -1,0 +1,23 @@
+{% extends "base.html" %}{% load widget_tweaks %}
+<span></span>
+{% block title %}PM | Login{% endblock %}
+<span></span>
+{% block content %}
+<div class="rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-auto -mt-4 mx-2 pb-12">
+  <div class="mx-auto">
+    <main class="font-sans mt-10">
+      <h2 class="mb-3 py-3 text-2xl md:text-3xl font-semibold text-gray-600 leading-tight">Login</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div>Username:{% render_field form.username class+="rounded-md border border-gray-300 ml-3 px-3 my-1 pb-1 focus:outline-none" placeholder="username" %}</div>
+        <div>Password: {% render_field form.password|add_error_class:"error-border" class+="rounded-md border border-gray-300 ml-3 px-3 my-1 pb-1 focus:outline-none" placeholder="password" %}</div>
+        <div class="flex justify-end">
+          <div class="rounded-lg border border-gray-300 text-black hover:bg-gray-500 hover:text-gray-50 px-3 my-1 py-2 w-max">
+            <button type="submit" class="font-bold">Log In</button>
+          </div>
+        </div>
+      </form>
+    </main>
+  </div>
+</div>
+{% endblock %}
