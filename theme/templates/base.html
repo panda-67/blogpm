@@ -12,7 +12,7 @@
 
     <link rel="icon" href="{% static 'img/Logo.svg' %}" type="image/gif" sizes="14 x 14" />
     <link rel="stylesheet" href="{% static 'css/styles.css' %}" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   </head>
 
   <body class="bg-grey-lightest font-sans leading-normal tracking-normal pt-16">
@@ -200,8 +200,8 @@
         <div class="flex justify-center items-center ml-1 px-3 h-10 hover:shadow-xl rounded-xl border">
           <a href="{% url 'login' %}">Log In</a>
         </div>
-        <div class="flex justify-center items-center ml-1 w-12 h-10 hover:shadow-xl rounded-xl border">
-          <a href="/admin/">
+        <div class="hidden md:flex justify-center items-center ml-1 w-12 h-10 hover:shadow-xl rounded-xl border">
+          <a href="/admin/pmnews/post/">
             <div class="w-8">
               <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 100%; width: 100%">
                 <path
