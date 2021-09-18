@@ -72,48 +72,50 @@
           </div>
         </div>
         <!-- end -->
-        <!-- social share --> 
-        <div class="mx-8 my-3">
-          <div class="flex mx-2 my-2 py-1 border-b border-gray-600 w-64">
-            <span class="font-semibold">Share Post</span>
-            <div class="ml-5 mb-1">              
-              <p>{% post_to_linkedin object_or_url  %}</p>
-            </div> 
-            <div class="ml-5 mb-1">       
-              <p>{% save_to_pinterest object_or_url %}</p>
-            </div>  
+        <div class="flex flex-wrap-reverse md:flex-wrap ">
+          <!-- social share --> 
+          <div class="mx-8 my-3">
+            <div class="flex mx-2 my-2 py-1 border-b border-gray-600 w-64">
+              <span class="font-semibold">Share Post</span>
+              <div class="ml-5 mb-1">              
+                <p>{% post_to_linkedin object_or_url  %}</p>
+              </div> 
+              <div class="ml-5 mb-1">       
+                <p>{% save_to_pinterest object_or_url %}</p>
+              </div>  
+            </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:flex"> 
+              <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">  
+                <i class="mt-1 mr-1 fa fa-whatsapp" style='color: rgb(3, 158, 49);'></i> 
+                <p>{% post_to_whatsapp object_or_url "<p style='color: rgb(3, 158, 49); font-weight:400;'>Whatsapp</p>" %}</p>
+              </div>  
+              <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400"> 
+                <i class="mt-1 mr-1 fa fa-telegram" aria-hidden="true" style='color: rgb(34, 80, 233);'></i> 
+                <p>{% post_to_telegram "{{object.title}}. Check it out!" object_or_url "<p style='color: rgb(34, 80, 233); font-weight:semibold;'>Telegram</p>" %}</p>
+              </div>  
+              <div class="flex mx-1 my-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">   
+                <i class="mt-1 mr-1 fa fa-facebook" aria-hidden="true" style='color: rgb(1, 52, 219);'></i>  
+                <p>{% post_to_facebook object_or_url "<p style='color: rgb(1, 52, 219); font-weight:semibold;'>Facebook</p>" %}</p>
+              </div>  
+              <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400"> 
+                <i class="mt-1 mr-1 fa fa-twitter" aria-hidden="true" style='color: rgb(34, 114, 233);'></i>     
+                <p>{% post_to_twitter "{{object.title}}. Check it out!" object_or_url "<p style='color: rgb(34, 114, 233); font-weight:400;'>Twitter</p>" %}</p>
+              </div> 
+              <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">
+                <i class="mt-1 mr-1 fa fa-reddit" aria-hidden="true" style='color: rgb(230, 0, 0);'></i>     
+                <p>{% post_to_reddit "{{object.title}}. Check it out!" object_or_url "<p style='color: rgb(230, 0, 0); font-weight:semibold;'>Reddit</p>" %}</p>
+              </div>  
+              <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">  
+                <i class="mt-1 mr-1 fa fa-envelope" aria-hidden="true" style='color: rgb(8, 7, 2);'></i> 
+                <p>{% send_email object.title "{{object.title}}. Check it out!" object_or_url "<p style='color: rgb(8, 7, 2); font-weight:semibold;'>Email</p>" %}</p>
+              </div>            
+            </div>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 md:flex"> 
-            <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">  
-              <i class="mt-1 mr-1 fa fa-whatsapp" style='color: rgb(3, 158, 49);'></i> 
-              <p>{% post_to_whatsapp object_or_url "<p style='color: rgb(3, 158, 49); font-weight:400;'>Whatsapp</p>" %}</p>
-            </div>  
-            <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400"> 
-              <i class="mt-1 mr-1 fa fa-telegram" aria-hidden="true" style='color: rgb(34, 80, 233);'></i> 
-              <p>{% post_to_telegram "{{object.title}}. Check it out!" object_or_url "<p style='color: rgb(34, 80, 233); font-weight:semibold;'>Telegram</p>" %}</p>
-            </div>  
-            <div class="flex mx-1 my-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">   
-              <i class="mt-1 mr-1 fa fa-facebook" aria-hidden="true" style='color: rgb(1, 52, 219);'></i>  
-              <p>{% post_to_facebook object_or_url "<p style='color: rgb(1, 52, 219); font-weight:semibold;'>Facebook</p>" %}</p>
-            </div>  
-            <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400"> 
-              <i class="mt-1 mr-1 fa fa-twitter" aria-hidden="true" style='color: rgb(34, 114, 233);'></i>     
-              <p>{% post_to_twitter "{{object.title}}. Check it out!" object_or_url "<p style='color: rgb(34, 114, 233); font-weight:400;'>Twitter</p>" %}</p>
-            </div> 
-            <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">
-              <i class="mt-1 mr-1 fa fa-reddit" aria-hidden="true" style='color: rgb(230, 0, 0);'></i>     
-              <p>{% post_to_reddit "{{object.title}}. Check it out!" object_or_url "<p style='color: rgb(230, 0, 0); font-weight:semibold;'>Reddit</p>" %}</p>
-            </div>  
-            <div class="flex mx-1 my-1 px-2 py-1 rounded-md bg-gray-200 hover:bg-gray-400">  
-              <i class="mt-1 mr-1 fa fa-envelope" aria-hidden="true" style='color: rgb(8, 7, 2);'></i> 
-              <p>{% send_email object.title "{{object.title}}. Check it out!" object_or_url "<p style='color: rgb(8, 7, 2); font-weight:semibold;'>Email</p>" %}</p>
-            </div>            
-          </div>
+          <!-- end -->
+          <!-- content -->
+          <div class="px-4 md:px-6 mt-12 text-gray-700 mx-4 text-base md:text-lg leading-lose tracking-normal">{{ post.content|safe }}</div>
+          <!-- end -->
         </div>
-        <!-- end -->
-        <!-- content -->
-        <div class="px-4 md:px-6 mt-12 text-gray-700 mx-4 text-base md:text-lg leading-lose tracking-normal">{{ post.content|safe }}</div>
-        <!-- end -->
       </main>
     </div>
   </div>
