@@ -37,6 +37,9 @@ def tag_list(request, tag_slug=None):
         posts = Post.objects.filter(tags__in=[tag])   
     return render(request,'pmnews/tag_list.html',{'posts':posts, 'tag':tag})
 
+def error_404(request, exception):
+    return render(request, '404.html')
+
 class ArticleMonthArchiveView(MonthArchiveView):
     queryset = Post.objects.filter(status=1).filter(created_on__lte=now)
     date_field = "created_on"
