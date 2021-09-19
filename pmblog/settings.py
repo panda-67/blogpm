@@ -154,8 +154,12 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
-
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # STATICFILES_STORAGE = ('whitenoise.storage.CompressedManifestStaticFilesStorage') 
@@ -180,3 +184,4 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 # NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 django_on_heroku.settings(locals())
+
