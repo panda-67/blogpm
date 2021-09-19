@@ -14,3 +14,7 @@ $ python3 -m pip install PyMySQL
 
 # pymysql.install_as_MySQLdb()
 
+
+#heroku
+heroku config:set DiSABLE_COLLECTSTATIC=1
+
