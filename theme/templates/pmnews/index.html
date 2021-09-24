@@ -24,15 +24,16 @@
     <!-- end -->
     <!-- pos -->
     <div class="flex flex-col items-center justify-center">
-      <div class="flex flex-col lg:grid lg:grid-cols-3 lg:gap-1 mx-2 my-3 md:mx-2 md:mt-10">
+      <div class="flex flex-col md:grid md:grid-flow-col md:gap-1 mx-2 my-3 md:mx-2 md:mt-10">
         {% for post in page_obj %}
-        <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}/">
+        <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}">
           <div class="mx-1 my-2 h-90 sm:h-90 lg:h-90 border shadow-lg rounded-xl hover:bg-gray-100">
             <div class="rounded-t-xl h-40 bg-black bg-opacity-40 bg-cover" style="background-image: url('/media/{{ post.cover_img }}')"></div>     
             <ul class="mx-2 px-2 py-4 grid h-60">
               <li class="text-base font-semibold pb-2">{{ post.title }}</li>
               <li class="flex items-center h-7 rounded-lg">
-                <svg class="w-4 mr-2"
+                <div class="flex mr-2">
+                  <svg class="w-4 mr-2"
                     viewBox="0 0 500 500" style="enable-background:new 0 0 500 500; fill: rgb(167, 152, 152);" xml:space="preserve">                    
                     <path d="M453.584,69.784h-16.576v-9.648c0-4.352-3.528-7.876-7.876-7.876c-4.344,0-7.872,3.52-7.872,7.876v9.648h-43.308v-9.648
                       c0-4.352-3.528-7.876-7.876-7.876c-4.348,0-7.876,3.52-7.876,7.876v9.648h-43.3v-9.648c0-4.352-3.528-7.876-7.876-7.876
@@ -58,27 +59,36 @@
                       M326.772,254.824v-31.496h55.116v31.496H326.772z M452.756,396.556h-55.12V365.06h55.12V396.556z M452.756,349.312h-55.12
                       v-31.496h55.12V349.312z M452.756,302.072h-55.12v-31.496h55.12V302.072z M452.756,254.824h-55.12v-31.496h55.12V254.824z
                       M452.756,207.584h-55.12v-31.496h55.12V207.584z"/>                     
-                </svg>
-                <span class="text-xs font-normal">{{ post.created_on|date:"F j, Y" }}</span>
-              </li>  
-              <span class="border-b border-black h-1"></span>            
-              <div class="text-sm whitespace-normal break-words">{{ post.content|safe|truncatewords:16 }}</div>
+                  </svg>
+                  <span class="text-xs font-normal">{{ post.created_on|date:"F j, Y" }}</span>
+                </div>                
+              </li>                           
+              <li class="border-t border-black mt-1 pt-3">
+                <div class="text-sm whitespace-normal break-words">{{ post.content|safe|truncatewords:16 }}</div>
+              </li>
               <!--Author  -->
-              <li class="flex items-center mt-4 w-max lg:w-auto pr-2 h-8 rounded-lg bg-gray-200 font-sans">
-                <svg viewBox="0 0 512 512" class="w-5 mx-2" style="fill: rgb(167, 152, 152);">
-                  <path d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48ZM205.78,164.82C218.45,151.39,236.28,144,256,144s37.39,7.44,50.11,20.94C319,178.62,325.27,197,323.79,216.76,320.83,256,290.43,288,256,288s-64.89-32-67.79-71.25C186.74,196.83,193,178.39,205.78,164.82ZM256,432a175.49,175.49,0,0,1-126-53.22,122.91,122.91,0,0,1,35.14-33.44C190.63,329,222.89,320,256,320s65.37,9,90.83,25.34A122.87,122.87,0,0,1,382,378.78,175.45,175.45,0,0,1,256,432Z"/>
-                </svg>
-                <span class="text-sm font-medium">{{ post.author|capfirst }}</span>
-                
-                <svg class="w-5 mx-2"
-                  viewBox="0 0 488.85 488.85" style="enable-background:new 0 0 488.85 488.85; fill: rgb(167, 152, 152);" xml:space="preserve">
-                  <path d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
-                  s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025
-                  c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
-                  C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7
-                  c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"/>
-                </svg>
-                <span class="text-sm font-medium">{% get_hit_count for post %}</span>
+              <li class="flex items-center justify-between mt-4 w-max lg:w-auto pr-2 h-8 rounded-lg bg-gray-200 font-sans">
+                <div class="flex items-center"> 
+                  <svg viewBox="0 0 512 512" class="w-5 mx-2" style="fill: rgb(167, 152, 152);">
+                    <path d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48ZM205.78,164.82C218.45,151.39,236.28,144,256,144s37.39,7.44,50.11,20.94C319,178.62,325.27,197,323.79,216.76,320.83,256,290.43,288,256,288s-64.89-32-67.79-71.25C186.74,196.83,193,178.39,205.78,164.82ZM256,432a175.49,175.49,0,0,1-126-53.22,122.91,122.91,0,0,1,35.14-33.44C190.63,329,222.89,320,256,320s65.37,9,90.83,25.34A122.87,122.87,0,0,1,382,378.78,175.45,175.45,0,0,1,256,432Z"/>
+                  </svg>
+                  <span class="text-sm font-medium">{{ post.author|capfirst }}</span>                
+                  <svg class="w-5 mx-2"
+                    viewBox="0 0 488.85 488.85" style="enable-background:new 0 0 488.85 488.85; fill: rgb(167, 152, 152);" xml:space="preserve">
+                    <path d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
+                    s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025
+                    c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
+                    C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7
+                    c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"/>
+                  </svg>
+                  <span class="text-sm font-medium">{% get_hit_count for post %}</span>
+                </div>
+                <div class="flex justify-end mr-3">
+                  <div class="flex" style="color: rgb(167, 152, 152); font-size: large;"><i class="fa fa-comments-o"></i><div>                 
+                  <div class="ml-3">
+                    <a class="text-black text-sm " href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}/#disqus_thread"></a>
+                  </div>
+                </div>
               </li>
               <!-- end -->
             </ul>                  
@@ -88,8 +98,7 @@
       </div>
       <div class="hidden lg:block">
         <span class="text-sm font-semibold flex items-center justify-center py-1 px-3 border rounded-lg h-10 shadow-lg"> {{ page_obj.number }} of {{ page_obj.paginator.num_pages }} Display(s) </span>
-      </div>
-     
+      </div>     
     </div>
     <!-- end -->
     <!-- tbl next -->
@@ -144,5 +153,6 @@
 
 </div>
 <!-- end -->
+<script id="dsq-count-scr" src="//blogpm67.disqus.com/count.js" async></script>
 
 {% endblock %}
