@@ -18,4 +18,4 @@ class PostAdmin(SummernoteModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
-admin.site.unregister(get_attachment_model())
+# admin.site.unregister(get_attachment_model())
