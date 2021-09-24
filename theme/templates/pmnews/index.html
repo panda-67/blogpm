@@ -28,8 +28,8 @@
         {% for post in page_obj %}
         <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}">
           <div class="mx-1 my-2 h-90 sm:h-90 lg:h-90 border shadow-lg rounded-xl hover:bg-gray-100">
-            <div class="rounded-t-xl h-40 bg-black bg-opacity-40 bg-cover" style="background-image: url('/media/{{ post.cover_img }}')"></div>     
-            <ul class="mx-2 px-2 py-4 grid h-60">
+            <div class="rounded-t-xl h-32 bg-black bg-opacity-40 bg-cover" style="background-image: url('/media/{{ post.cover_img }}')"></div>     
+            <ul class="mx-2 px-2 py-4 grid">
               <li class="text-base font-semibold pb-2">{{ post.title }}</li>
               <li class="flex items-center h-7 rounded-lg">
                 <div class="flex mr-2">
@@ -61,7 +61,7 @@
                       M452.756,207.584h-55.12v-31.496h55.12V207.584z"/>                     
                   </svg>
                   <span class="text-xs font-normal">{{ post.created_on|date:"F j, Y" }}</span>
-                </div>                
+                </div>                              
               </li>                           
               <li class="border-t border-black mt-1 pt-3">
                 <div class="text-sm whitespace-normal break-words">{{ post.content|safe|truncatewords:16 }}</div>
@@ -92,6 +92,18 @@
                 </div>
               </li>
               <!-- end -->
+              <li>
+                <!-- tags -->
+                <div class="flex items-center px-2 mt-2 py-1">
+                  <div class="flex text-xl" style="color: rgb(167, 152, 152);"><i class="fa fa-tags"></i>
+                  </div> 
+                  {% for t in post.tags.all %}
+                  <a href="{% url 'tag_list' t.slug %}" class="mx-1 px-2 pb-1 my-2 rounded-bl-md bg-gray-400 text-xs font-semibold text-gray-50 inline-flex items-center justify-center"> {{t.name|capfirst}} </a>
+                  <!-- {% if not forloop.last %}, {% endif %}  -->
+                  {% endfor %}
+                </div>
+                <!-- end -->  
+              </li>
             </ul>                  
           </div>        
         </a>
@@ -135,23 +147,5 @@
   <!-- end -->
 </div>
 
-<!-- tags -->
-<div class="flex items-center mx-10 sm:mx-36 mb-4">
-  <svg class="hidden sm:block w-8 mx-2" viewBox="0 0 393.89 342.41" style="enable-background:new 0 0 500 500; fill: rgb(167, 152, 152);" xml:space="preserve">
-    <path
-      d="M389.22,52.63a27.08,27.08,0,0,0-14.48-11.56s0,0,0,0L261.07,2.11H261A27,27,0,0,0,238.4,4.3L14.33,133.66A27.53,27.53,0,0,0,4.27,171.21L94.84,328.08a27.56,27.56,0,0,0,37.55,10.06L356.46,208.78a27.09,27.09,0,0,0,13.22-18.49v0L392.8,72.35s0,0,0,0a27.13,27.13,0,0,0-2.91-18.58c-.21-.37-.43-.76-.65-1.12ZM353.31,74.28a25.92,25.92,0,1,1-35.39-9.51,25.87,25.87,0,0,1,35.39,9.51Z"
-    />
-  </svg>
-  {% for post in page_obj %} {% for tag in post.tags.all %}
-  <a href="{% url 'tag_list' tag.slug %}" class="mx-1 px-2 pb-1 my-2 rounded-md bg-gray-600 text-xs font-semibold text-gray-100 inline-flex items-center justify-center"> {{tag.name|capfirst}} </a>
-  <!-- {% if not forloop.last %}, {% endif %}  -->
-  {% endfor %} {% endfor %}
-</div>
-{% for t in tg %}
-  {{t.name|capfirst}}
-{% endfor %}
-<div>
 
-</div>
-<!-- end -->
 {% endblock %}
