@@ -25,6 +25,7 @@ class Post(models.Model):
     created_on = models.DateTimeField()
     status = models.IntegerField(choices=STATUS, default=1)
     tags = TaggableManager()
+    vlink = models.CharField(max_length=255, blank=True)
     content = models.TextField()
     hit_count_generic = GenericRelation(HitCount, object_id_field='object_pk', related_query_name='hit_count_generic_relation')
     class Meta:

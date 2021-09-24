@@ -6,7 +6,7 @@
 <!-- component -->
 
 <div class="flex flex-col md:flex-row overflow-x-none mx-2 md:mx-10 lg:mx-14">
-  <div class="relative rounded-lg flex flex-col md:flex-row items-center md:shadow-xl md:h-auto -mt-4 mx-2 pb-12 w-auto md:w-3/4">
+  <div class="relative rounded-lg flex flex-col lg:flex-row items-center lg:shadow-xl lg:h-auto -mt-4 mx-2 pb-12 w-auto lg:w-3/4">
     <div class="mx-auto">
       <main class="font-sans mt-8">
         <!-- head -->
@@ -21,10 +21,8 @@
                   <svg class="w-7 mx-2" viewBox="0 0 488.85 488.85" style="enable-background: new 0 0 488.85 488.85; fill: rgb(255, 255, 255)" xml:space="preserve">
                     <path
                       d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
-                s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025
-                c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
-                C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7
-                c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"
+                      s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
+                      C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7 c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"
                     />
                   </svg>
                   <span class="px-2 py-1 rounded-md bg-gray-100 text-sm font-semibold text-gray-700">{% get_hit_count for post %}</span>
@@ -111,17 +109,35 @@
               </div>            
             </div>
           </div>
-          <!-- end -->
-          <!-- content -->
-          <div class="px-4 md:px-6 mt-12 text-gray-700 mx-4 text-base md:text-lg leading-lose tracking-normal">{{ post.content|safe }}</div>
-          <!-- end -->
+          <!-- end -->          
         </div>
+        <!-- content -->
+        <div class="px-4 md:px-6 mt-12 text-gray-700 mx-4 text-base md:text-lg leading-lose tracking-normal">{{ post.content|safe }}</div>
+        <!-- end -->
+        <!-- video -->
+        {% if post.vlink %}
+        <div class="mx-7 pt-4 px-4">
+          <div class="text-lg font-semibold">
+            <h1>Untuk lebih memahami silahkan melihat video berikut:</h1>
+          </div>          
+          <div class="">
+            <iframe class="h-44 sm:h-96 w-full " src="{{ post.vlink }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>            
+          </div>
+          <div class="flex justify-center text-center my-1 pt-3 w-full">
+            <p>Video penjelasan tentang {{ post.title }}.</p>
+          </div>
+        </div>
+        {% endif %}
+        <!-- end -->
       </main>
-      <div class="mx-10 mt-10 text-xl font-bold"><h1>Ayo Berikan Pendapat Anda!</h1></div>
+      <!-- comment -->
+      <div class="mx-10 mt-6 text-xl font-bold"><h1>Ayo Berikan Pendapat Anda!</h1></div>
       <div class="mx-10" id="disqus_thread"></div>
+      <!-- end -->
     </div>
   </div>
-  <div class="m-2 p-3 md:w-1/4">
+  <!-- panel kanan -->
+  <div class="m-2 p-3 lg:w-1/4">
     <div class="font-sans text-black bg-gray-100 text-sm font-semibold md:text-base flex items-center lg:h-6 px-3 pt-1 pb-2 mb-3 lg:px-3 hover:bg-gray-500 hover:text-gray-100">
       <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/">Artikel: {{ post.created_on|date:"j-m-Y" }}</a>
     </div>
@@ -203,6 +219,7 @@
       {% endfor %}
     </div>
   </div>
+  <!-- end -->
 </div>
 <!-- footnote -->
 <div class="flex items-center justify-center rounded-xl my-6">
