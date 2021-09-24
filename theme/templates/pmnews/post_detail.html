@@ -121,7 +121,7 @@
             <h1>Untuk lebih memahami silahkan melihat video berikut:</h1>
           </div>          
           <div class="">
-            <iframe class="h-44 sm:h-96 w-full " src="{{ post.vlink }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>            
+            <iframe class="h-44 sm:h-96 w-full " src="{{ post.vlink|safe  }}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>            
           </div>
           <div class="flex justify-center text-center my-1 pt-3 w-full">
             <p>Video penjelasan tentang {{ post.title }}.</p>
