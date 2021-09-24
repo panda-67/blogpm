@@ -83,9 +83,10 @@
                   </svg>
                   <span class="text-sm font-medium">{% get_hit_count for post %}</span>
                 </div>
-                <div class="flex justify-end mr-3">
-                  <div class="flex" style="color: rgb(167, 152, 152); font-size: large;"><i class="fa fa-comments-o"></i><div>                 
-                  <div class="ml-3">
+                <div class="flex items-center justify-end mx-2">
+                  <div class="flex text-xl" style="color: rgb(167, 152, 152);"><i class="fa fa-comments-o"></i>
+                  </div>                 
+                  <div class="ml-1">
                     <a class="text-black text-sm " href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}/#disqus_thread"></a>
                   </div>
                 </div>

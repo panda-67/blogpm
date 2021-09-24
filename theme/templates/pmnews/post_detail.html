@@ -186,12 +186,13 @@
                   C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7
                   c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"/>
                 </svg>
-                <span class="text-sm font-medium">{% get_hit_count for post %}</span>
+                <span class="text-sm font-medium">{% get_hit_count for p %}</span>
               </div>
-              <div class="flex justify-end items-center mr-1">
-                <div class="flex" style="color: rgb(167, 152, 152); font-size: large;"><i class="fa fa-comments-o"></i><div>                 
+              <div class="flex justify-end items-center ml-2 mr-1">
+                <div class="flex text-xl" style="color: rgb(167, 152, 152);"><i class="fa fa-comments-o"></i>
+                </div>                 
                 <div class="ml-1">
-                  <a class="text-black text-sm" href="/{{ p.created_on|date:'Y' }}/{{ p.created_on|date:'m' }}/{{ p.created_on|date:'d' }}/{{ p.slug }}/#disqus_thread"></a>
+                  <a class="text-sm" href="/{{ p.created_on|date:'Y' }}/{{ p.created_on|date:'m' }}/{{ p.created_on|date:'d' }}/{{ p.slug }}/#disqus_thread"></a>
                 </div>
               </div>
             </li>
