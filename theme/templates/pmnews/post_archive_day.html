@@ -18,32 +18,40 @@
     <div class="w-10"></div>
     {% endif %}
   </div>
-  <div class="py-8 flex flex-col md:grid md:grid-cols-2 -mx-2 md:mx-6 mt-3 md:mt-1">
+  <div class="py-8 flex flex-col md:grid md:grid-flow-row -mx-2 md:mx-6 mt-3 md:mt-1">
     {% for post in object_list %}
     <a href="/{{ post.created_on|date:'Y' }}/{{ post.created_on|date:'m' }}/{{ post.created_on|date:'d' }}/{{ post.slug }}/">
-      <div class="px-8 mx-3 py-3 my-2 h-60 border rounded-xl shadow-lg hover:bg-gray-100">
+      <div class="px-8 mx-3 py-3 my-2 border rounded-xl shadow-lg hover:bg-gray-200">
         <ul>
-          <li class="pb-8">{{ post.created_on|date:"d/m/Y" }}</li>
-          <li class="font-semibold text-base py-2">{{ post.title }}</li>
+          <li class="font-semibold text-base py-2 mb-2 flex justify-between">
+            <div>{{ post.title }}</div>
+            <div class="font-normal">{{ post.created_on|date:"d/m/Y" }}</div>
+          </li>
           <div class="text-sm">
-            <p>{{ post.content|safe|truncatewords:16 }}</p>
+            <p>{{ post.content|safe|truncatewords:30 }}</p>
           </div>
+          <li>
+            <div class="flex items-center my-2">
+              <div class="flex text-xl" style="color: rgb(167, 152, 152)"><i class="fa fa-tags"></i></div>
+              <div class="">
+                {% for tag in post.tags.all %}
+                <a
+                  href="{% url 'tag_list' tag.slug %}"
+                  style="background-color: rgb(167, 152, 152)"
+                  class="px-2 py-1 mx-1 rounded-md bg-gray-400 text-xs font-semibold text-gray-50 inline-flex items-center justify-center"
+                >
+                  {{tag.name|capfirst}}
+                </a>
+                <!-- {% if not forloop.last %}, {% endif %}  -->
+                {% endfor %}
+              </div>
+            </div>
+          </li>
         </ul>
       </div>
     </a>
     {% endfor %}
     <!-- <p>{% if previous_day and next_day %}--{% endif %}</p> -->
-  </div>
-  <div class="flex items-center mx-4 sm:mx-8 mb-4">
-    <svg class="hidden sm:block w-8 mx-2" viewBox="0 0 393.89 342.41">
-      <path
-        d="M389.22,52.63a27.08,27.08,0,0,0-14.48-11.56s0,0,0,0L261.07,2.11H261A27,27,0,0,0,238.4,4.3L14.33,133.66A27.53,27.53,0,0,0,4.27,171.21L94.84,328.08a27.56,27.56,0,0,0,37.55,10.06L356.46,208.78a27.09,27.09,0,0,0,13.22-18.49v0L392.8,72.35s0,0,0,0a27.13,27.13,0,0,0-2.91-18.58c-.21-.37-.43-.76-.65-1.12ZM353.31,74.28a25.92,25.92,0,1,1-35.39-9.51,25.87,25.87,0,0,1,35.39,9.51Z"
-      />
-    </svg>
-    {% for post in object_list %} {% for tag in post.tags.all %}
-    <a href="{% url 'tag_list' tag.slug %}" class="mx-1 px-2 pb-1 my-2 rounded-md bg-gray-600 text-xs font-semibold text-gray-100 inline-flex items-center justify-center"> {{tag.name|capfirst}} </a>
-    <!-- {% if not forloop.last %}, {% endif %}  -->
-    {% endfor %} {% endfor %}
   </div>
 </div>
 {% endblock %}
