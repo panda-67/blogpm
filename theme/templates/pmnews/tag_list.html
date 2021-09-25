@@ -2,32 +2,26 @@
 <span></span>
 {% block title %}PM | Tags{% endblock %} {% block content %} {% if tag %}
 <div class="container mx-auto my-5 flex flex-col items-start">
-  <div class="rounded-lg flex items-center justify-center md:shadow-xl md:h-24 w-max mx-10 px-4 py-3">
-    <svg class="w-12 mr-3 mt-2" viewBox="0 0 393.89 342.41">
-      <path
-        d="M389.22,52.63a27.08,27.08,0,0,0-14.48-11.56s0,0,0,0L261.07,2.11H261A27,27,0,0,0,238.4,4.3L14.33,133.66A27.53,27.53,0,0,0,4.27,171.21L94.84,328.08a27.56,27.56,0,0,0,37.55,10.06L356.46,208.78a27.09,27.09,0,0,0,13.22-18.49v0L392.8,72.35s0,0,0,0a27.13,27.13,0,0,0-2.91-18.58c-.21-.37-.43-.76-.65-1.12ZM353.31,74.28a25.92,25.92,0,1,1-35.39-9.51,25.87,25.87,0,0,1,35.39,9.51Z"
-      />
-    </svg>
-    <span class="font-sans font-bold text-lg text-gray-700"> {{ tag.name|capfirst }}</span>
+  <div class="text-2xl rounded-lg flex items-center justify-center md:shadow-xl mx-10 px-4 py-3">
+    <div class="flex mr-2" style="color: rgb(167, 152, 152)"><i class="fa fa-tags"></i></div>
+    <span class="font-sans font-bold text-gray-700"> {{ tag.name|capfirst }}</span>
   </div>
   {% endif %} {% for pos in posts %}
   <div class="container mx-auto my-5">
     <a href="/{{ pos.created_on|date:'Y' }}/{{ pos.created_on|date:'m' }}/{{ pos.created_on|date:'d' }}/{{ pos.slug }}/" target="_blank">
-      <div class="relative rounded-lg flex flex-col justify-start shadow-xl md:h-55 m-4 md:m-10 p-12 md:mt-4 hover:bg-gray-200">
+      <div class="relative rounded-lg flex flex-col justify-start shadow-xl mx-4 md:m-10 p-8 md:mt-4 hover:bg-gray-200">
         <h3 class="font-bold text-2xl text-gray-700">{{ pos.title }}</h3>
+        <p class="text-gray-600">{{ pos.content|safe|truncatewords:35}}</p>
+        <div class="py-2"><span class="font-semibold text-sm">Read more</span><span class="text-xs ml-1">&#x279c;</span></div>
         <div class="flex items-center mt-2">
-          <svg class="w-8 mx-2" viewBox="0 0 393.89 342.41">
-            <path
-              d="M389.22,52.63a27.08,27.08,0,0,0-14.48-11.56s0,0,0,0L261.07,2.11H261A27,27,0,0,0,238.4,4.3L14.33,133.66A27.53,27.53,0,0,0,4.27,171.21L94.84,328.08a27.56,27.56,0,0,0,37.55,10.06L356.46,208.78a27.09,27.09,0,0,0,13.22-18.49v0L392.8,72.35s0,0,0,0a27.13,27.13,0,0,0-2.91-18.58c-.21-.37-.43-.76-.65-1.12ZM353.31,74.28a25.92,25.92,0,1,1-35.39-9.51,25.87,25.87,0,0,1,35.39,9.51Z"
-            />
-          </svg>
+          <div class="flex text-xl" style="color: rgb(167, 152, 152)"><i class="fa fa-tags"></i></div>
           {% for tag in pos.tags.all %}
-          <a href="{% url 'tag_list' tag.slug %}" class="mx-1 px-2 pb-1 my-2 rounded-md bg-gray-600 text-xs font-semibold text-gray-100 inline-flex items-center justify-center"> {{tag.name|capfirst}} </a>
+          <a href="{% url 'tag_list' tag.slug %}" style="background-color: rgb(167, 152, 152)" class="px-2 py-1 mx-1 rounded-md bg-gray-400 text-xs font-semibold text-gray-50 inline-flex items-center justify-center">
+            {{tag.name|capfirst}}
+          </a>
           <!-- {% if not forloop.last %}, {% endif %}  -->
           {% endfor %}
         </div>
-        <p class="text-gray-600">{{ pos.content|safe|truncatewords:17 }}</p>
-        <div class="py-2"><span class="font-semibold text-sm">Read more</span><span class="text-xs ml-1">&#x279c;</span></div>
       </div>
     </a>
   </div>
