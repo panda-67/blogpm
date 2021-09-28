@@ -16,17 +16,7 @@
             <div class="flex flex-col p-4 z-20">
               <h2 class="py-3 text-2xl md:text-3xl font-semibold text-gray-50 leading-tight">{{ post.title }}</h2>
               <!-- hit_c & tags -->
-              <div class="flex items-center">
-                <p class="flex items-center w-max h-6 pr-2 rounded-lg font-mono font-semibold text-base">
-                  <svg class="w-7 mx-2" viewBox="0 0 488.85 488.85" style="enable-background: new 0 0 488.85 488.85; fill: rgb(255, 255, 255)" xml:space="preserve">
-                    <path
-                      d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
-                      s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
-                      C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7 c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"
-                    />
-                  </svg>
-                  <span class="px-2 py-1 rounded-md bg-gray-100 text-sm font-semibold text-gray-700">{% get_hit_count for post %}</span>
-                </p>
+              <div class="flex items-center">                
                 <div class="flex items-center">
                   <svg class="w-6 mx-2" viewBox="0 0 393.89 342.41" style="enable-background: new 0 0 488.85 488.85; fill: rgb(255, 255, 255)" xml:space="preserve">
                     <path
@@ -60,6 +50,14 @@
                       ></path>
                     </svg>
                     <p class="text-sm">Ditulis oleh: <span class="text-sm md:text-base">{{ post.author|capfirst }}</span></p>
+                    <svg class="w-5 ml-4" viewBox="0 0 488.85 488.85" style="enable-background: new 0 0 488.85 488.85; fill: rgb(255, 255, 255)" xml:space="preserve">
+                      <path
+                        d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
+                        s178.1-51.1,240.6-134.1c5.1-6.8,5.1-16.3,0-23.1C422.525,149.825,337.825,98.725,244.425,98.725z M251.125,347.025c-62,3.9-113.2-47.2-109.3-109.3c3.2-51.2,44.7-92.7,95.9-95.9c62-3.9,113.2,47.2,109.3,109.3
+                        C343.725,302.225,302.225,343.725,251.125,347.025z M248.025,299.625c-33.4,2.1-61-25.4-58.8-58.8c1.7-27.6,24.1-49.9,51.7-51.7 c33.4-2.1,61,25.4,58.8,58.8C297.925,275.625,275.525,297.925,248.025,299.625z"
+                      />
+                    </svg>
+                    <span class="px-2 py-1 rounded-md text-sm font-bold">{% get_hit_count for post %}</span>
                   </div>
                   <p class="text-sm md:text-base ml-1">Pada: {{ post.created_on|date:"d-m-Y" }} | <span>{{ post.created_on|time }}</span></p>
                   <p class="text-sm md:text-base ml-1">Edit: {{ post.updated_on|date:"d-m-Y" }} | <span>{{ post.updated_on|time }}</span></p>
@@ -112,7 +110,7 @@
           <!-- end -->
           <div>
             <!-- content -->
-            <div class="px-4 md:px-6 mt-12 text-gray-700 mx-4 text-base md:text-lg leading-lose tracking-normal">{{ post.content|safe }}</div>
+            <div class="px-4 md:px-6 mt-4 text-gray-700 mx-4 text-base md:text-lg leading-lose tracking-normal">{{ post.content|safe }}</div>
             <!-- end -->
             <!-- video -->
             {% if post.vlink %}
@@ -187,7 +185,7 @@
             </li>
             <span class="border-b border-black h-1"></span>
             <li class="border-t border-black mt-1 pt-3">
-              <div class="text-sm whitespace-normal break-words">{{ post.content|safe|truncatewords:16 }}</div>
+              <div class="text-sm whitespace-normal break-words">{{ p.content|safe|truncatewords:17 }}</div>
             </li>
             <!--Author  -->
             <li class="flex items-center justify-between mt-4 w-max lg:w-auto pr-2 h-8 rounded-lg bg-gray-200 font-sans">
@@ -195,7 +193,7 @@
                 <svg viewBox="0 0 512 512" class="w-5 mx-2" style="fill: rgb(167, 152, 152);">
                   <path d="M256,48C141.31,48,48,141.31,48,256s93.31,208,208,208,208-93.31,208-208S370.69,48,256,48ZM205.78,164.82C218.45,151.39,236.28,144,256,144s37.39,7.44,50.11,20.94C319,178.62,325.27,197,323.79,216.76,320.83,256,290.43,288,256,288s-64.89-32-67.79-71.25C186.74,196.83,193,178.39,205.78,164.82ZM256,432a175.49,175.49,0,0,1-126-53.22,122.91,122.91,0,0,1,35.14-33.44C190.63,329,222.89,320,256,320s65.37,9,90.83,25.34A122.87,122.87,0,0,1,382,378.78,175.45,175.45,0,0,1,256,432Z"/>
                 </svg>
-                <span class="text-sm font-medium">{{ post.author|capfirst }}</span>                
+                <span class="text-sm font-medium">{{ p.author|capfirst }}</span>                
                 <svg class="w-5 mx-2"
                   viewBox="0 0 488.85 488.85" style="enable-background:new 0 0 488.85 488.85; fill: rgb(167, 152, 152);" xml:space="preserve">
                   <path d="M244.425,98.725c-93.4,0-178.1,51.1-240.6,134.1c-5.1,6.8-5.1,16.3,0,23.1c62.5,83.1,147.2,134.2,240.6,134.2
